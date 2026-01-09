@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>MAZE INFINITY - 100+ Levels</title>
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+	
+	
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+	
+	<div class="cyber-grid"></div>
+	
+	<div class="header">
+		<!-- Main game title -->
+		<h1>MAZE INFINITY</h1>
+		
+		<!-- Subtitle showing total levels -->
+		<p class="subtitle">100+ Levels • Infinite Challenge</p>
+		
+		
+		<div id="user-display"></div>
+		
+		
+		<div id="level-display">LEVEL 1</div>
+	</div>
+	
+	
+	<div class="progress-container">
+		<div class="progress-bar-outer">
+			<div id="progress-bar">0 / 100</div>
+		</div>
+	</div>
+	
+	
+	<div class="main-container">
+		
+		<!-- 
+		
+		LEFT SIDE: MAZE GAME
+		This is where the actual maze appears and you play
+		-->
+		<div class="game-section">
+			
+			<div class="current-level">
+				<span id="current-level"> Novice Trail</span>
+			</div>
+			
+			
+			<canvas></canvas>
+		</div>
+		
+		<!-- 
+		RIGHT SIDE: CONTROL PANEL
+		Level selection, navigation, and action buttons
+		-->
+		<div class="control-panel">
+			<h2>CONTROLS</h2>
+			
+			<!-- 
+			Previous/Next level buttons
+			Navigate between unlocked levels
+			-->
+			<div class="nav-controls">
+				<button id="prev-level" class="nav-btn">← Previous</button>
+				<button id="next-level" class="nav-btn">Next →</button>
+			</div>
+			
+			<!-- 
+			Jump to level input
+			Type a number (1-100) to jump directly to that level
+			Only works for unlocked levels
+			-->
+			<div class="level-search">
+				<input id="level-search" type="number" placeholder="Jump to level..." min="1">
+			</div>
+			
+			<h2 style="font-size: 18px; margin: 20px 0 10px 0;">AVAILABLE LEVELS</h2>
+			
+			
+			-->
+			<div id="stages-container" class="stages-container"></div>
+			
+			
+			<div class="action-buttons">
+				<button id="solve"> SOLVE</button>
+				<button id="restart"> RESTART</button>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div id="login-modal" class="modal">
+		<div class="modal-content">
+			
+			
+			<div id="login-section">
+				<h2>🎮 MAZE INFINITY</h2>
+				<p>Login to save your progress</p>
+				
+				<!-- 
+				Login form
+				Submits to JavaScript function (doesn't reload page)
+				-->
+				<form id="login-form">
+					<input type="text" id="username" placeholder="Username" required>
+					<input type="password" id="password" placeholder="Password" required>
+					<button type="submit">LOGIN</button>
+				</form>
+				
+				<!-- 
+				Link to registration screen
+				Switches display from login to register
+				-->
+				<p class="modal-link">
+					Don't have an account? 
+					<a href="#" id="show-register">Register here</a>
+				</p>
+				
+				
+				<button id="guest-btn" class="guest-btn">Continue as Guest</button>
+				<p class="guest-note">* Guest progress will not be saved</p>
+			</div>
+			
+			
+			<div id="register-section" style="display: none;">
+				<h2> CREATE ACCOUNT</h2>
+				<p>Register to save your progress</p>
+				
+				
+				<form id="register-form">
+					<input type="text" id="reg-username" placeholder="Username" required>
+					<input type="password" id="reg-password" placeholder="Password" required>
+					<input type="password" id="reg-confirm" placeholder="Confirm Password" required>
+					<button type="submit">REGISTER</button>
+				</form>
+				
+				
+				<p class="modal-link">
+					Already have an account? 
+					<a href="#" id="show-login">Login here</a>
+				</p>
+			</div>
+			
+		</div>
+	</div>
+	
+	
+	<script src="data-structures.js"></script>
+	<script src="maze.js"></script>
+	<script src="user.js"></script>
+	<script src="game.js"></script>
+</body>
+</html>
