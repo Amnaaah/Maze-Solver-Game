@@ -1,0 +1,599 @@
+
+* {
+    margin: 0;                         /* Remove all default margins */
+    padding: 0;                        /* Remove all default padding */
+    box-sizing: border-box;           /* Include padding/border in width calculations */
+}
+
+/* 
+========================================
+BODY (Main page background)
+Dark gradient background for cyberpunk aesthetic
+Covers full viewport height
+========================================
+*/
+body {
+    font-family: 'Rajdhani', sans-serif;  /* Modern clean font for body text */
+    background: linear-gradient(135deg, #0a0a1e 0%, #16213e 100%);  /* Dark blue gradient */
+    color: #ffffff;                    /* White text by default */
+    min-height: 100vh;                 /* At least full viewport height */
+    overflow-x: hidden;                /* Prevent horizontal scrolling */
+    position: relative;                /* For absolute positioned children */
+}
+
+/* ========================================
+   ANIMATED BACKGROUND GRID
+   Creates moving grid effect behind all content
+   Pure CSS animation with green lines
+   Creates "Matrix" style cyberpunk look
+   ======================================== */
+.cyber-grid {
+    position: fixed;                   /* Stay in place when scrolling */
+    top: 0;
+    left: 0;
+    width: 100%;                       /* Cover entire screen */
+    height: 100%;
+    background-image:                  /* Create grid pattern with two gradients */
+        linear-gradient(rgba(0, 255, 136, 0.1) 1px, transparent 1px),      /* Horizontal lines */
+        linear-gradient(90deg, rgba(0, 255, 136, 0.1) 1px, transparent 1px);  /* Vertical lines */
+    background-size: 50px 50px;        /* Grid cell size */
+    animation: gridMove 20s linear infinite;  /* Animate grid movement */
+    pointer-events: none;              /* Allow clicking through grid */
+    z-index: 0;                        /* Behind all other content */
+}
+
+/* 
+Grid animation
+Moves grid diagonally to create flowing effect
+Takes 20 seconds to complete one cycle
+*/
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }      /* Start position */
+    100% { transform: translate(50px, 50px); }  /* End position (one grid cell) */
+}
+
+/* ========================================
+   HEADER SECTION
+   Top bar with game title and user info
+   Has gradient text effect and glowing border
+   ======================================== */
+.header {
+    position: relative;                /* Above background grid */
+    z-index: 10;
+    text-align: center;                /* Center all text */
+    padding: 20px;
+    background: rgba(10, 10, 30, 0.8);  /* Semi-transparent dark background */
+    border-bottom: 2px solid #00ff88;   /* Green glowing line at bottom */
+    box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);  /* Green glow effect */
+}
+
+/* 
+Main title "MAZE INFINITY"
+Uses Orbitron font (futuristic style)
+Gradient color effect (green → cyan → pink)
+*/
+.header h1 {
+    font-family: 'Orbitron', sans-serif;  /* Tech/futuristic font */
+    font-size: 3em;                    /* Large title */
+    font-weight: 900;                  /* Extra bold */
+    letter-spacing: 5px;               /* Space between letters */
+    background: linear-gradient(90deg, #00ff88, #00d4ff, #ff0066);  /* Gradient colors */
+    -webkit-background-clip: text;     /* Make gradient show through text */
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);  /* Glowing effect */
+    margin-bottom: 10px;
+}
+
+/* 
+Subtitle "100+ Levels • Infinite Challenge"
+Cyan color with letter spacing
+*/
+.subtitle {
+    font-size: 1.2em;
+    color: #00d4ff;                    /* Cyan color */
+    font-weight: 500;
+    letter-spacing: 2px;               /* Spaced out letters */
+}
+
+/* 
+User display area (shows username or "Guest Mode")
+Green color to indicate active user
+*/
+#user-display {
+    margin-top: 10px;
+    font-size: 1.1em;
+    color: #00ff88;                    /* Green color */
+    font-weight: 700;
+}
+
+/* 
+Level display (shows "LEVEL 1", "LEVEL 2", etc.)
+Pink color to stand out
+*/
+#level-display {
+    margin-top: 10px;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #ff0066;                    /* Pink color */
+    letter-spacing: 3px;
+}
+
+/* ========================================
+   PROGRESS BAR
+   Shows completion "15 / 100" style counter
+   Green border with rounded corners
+   ======================================== */
+.progress-container {
+    position: relative;                /* Above background */
+    z-index: 10;
+    padding: 20px;
+    text-align: center;
+}
+
+/* 
+Outer progress bar container
+Has green border and dark background
+*/
+.progress-bar-outer {
+    max-width: 600px;
+    margin: 0 auto;                    /* Center on page */
+    background: rgba(0, 0, 0, 0.5);    /* Dark semi-transparent */
+    border: 2px solid #00ff88;         /* Green border */
+    border-radius: 30px;               /* Rounded corners */
+    overflow: hidden;
+    position: relative;
+}
+
+/* 
+Inner progress text
+Shows "X / 100" where X is completed levels
+*/
+#progress-bar {
+    padding: 15px;
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #ffffff;                    /* White text */
+    letter-spacing: 2px;
+}
+
+/* ========================================
+   MAIN CONTAINER
+   ======================================== */
+.main-container {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+/* ========================================
+   GAME SECTION (LEFT SIDE)
+   ======================================== */
+.game-section {
+    flex: 1;
+    min-width: 300px;
+    max-width: 650px;
+    background: rgba(10, 10, 30, 0.9);
+    border: 3px solid #00ff88;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.4);
+}
+
+.current-level {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#current-level {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #00ff88;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 2px solid #00d4ff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    background: #0a0a1e;
+    cursor: crosshair;
+}
+
+/* ========================================
+   CONTROL PANEL (RIGHT SIDE)
+   ======================================== */
+.control-panel {
+    flex: 0 0 350px;
+    background: rgba(10, 10, 30, 0.9);
+    border: 3px solid #ff0066;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 40px rgba(255, 0, 102, 0.4);
+    max-height: 700px;
+    overflow-y: auto;
+}
+
+.control-panel h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5em;
+    color: #ff0066;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+}
+
+/* ========================================
+   NAVIGATION CONTROLS
+   ======================================== */
+.nav-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.nav-btn {
+    flex: 1;
+    padding: 12px;
+    font-size: 1em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #00ff88, #00d4ff);
+    color: #0a0a1e;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 255, 136, 0.6);
+}
+
+.nav-btn:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+   LEVEL SEARCH
+   ======================================== */
+.level-search {
+    margin-bottom: 20px;
+}
+
+#level-search {
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border: 2px solid #00d4ff;
+    border-radius: 10px;
+    text-align: center;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#level-search:focus {
+    border-color: #00ff88;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
+
+/* ========================================
+   LEVEL BUTTONS CONTAINER
+   Grid of level selection buttons
+   Scrollable area with custom green scrollbar
+   ======================================== */
+.stages-container {
+    display: grid;                     /* Use CSS Grid layout */
+    grid-template-columns: repeat(2, 1fr);  /* 2 columns of equal width */
+    gap: 10px;                         /* Space between buttons */
+    margin-bottom: 20px;
+    max-height: 300px;                 /* Limit height */
+    overflow-y: auto;                  /* Enable vertical scrolling */
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);    /* Dark background */
+    border-radius: 10px;
+}
+
+/* Custom scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+.stages-container::-webkit-scrollbar {
+    width: 8px;                        /* Thin scrollbar */
+}
+
+.stages-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.5);    /* Dark track */
+    border-radius: 10px;
+}
+
+.stages-container::-webkit-scrollbar-thumb {
+    background: #00ff88;               /* Green thumb (matches theme) */
+    border-radius: 10px;
+}
+
+/* 
+Individual level button
+Default state: Blue border and cyan text
+*/
+.stage-btn {
+    padding: 12px;
+    font-size: 0.9em;
+    font-weight: 700;
+    background: rgba(0, 212, 255, 0.2);  /* Transparent cyan background */
+    color: #00d4ff;                    /* Cyan text */
+    border: 2px solid #00d4ff;         /* Cyan border */
+    border-radius: 10px;
+    cursor: pointer;                   /* Show hand cursor on hover */
+    transition: all 0.3s ease;         /* Smooth animations */
+    display: flex;                     /* Flexbox for emoji + text */
+    align-items: center;               /* Vertical center */
+    justify-content: center;           /* Horizontal center */
+    gap: 8px;                          /* Space between emoji and text */
+}
+
+/* 
+Hover effect on level buttons
+Scales up slightly and adds glow
+*/
+.stage-btn:hover {
+    background: rgba(0, 212, 255, 0.4);  /* Brighter background */
+    transform: scale(1.05);            /* Slightly larger */
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);  /* Cyan glow */
+}
+
+/* 
+COMPLETED LEVEL BUTTON
+Green color to show level was finished
+*/
+.stage-btn.completed {
+    background: rgba(0, 255, 136, 0.3);  /* Green background */
+    border-color: #00ff88;             /* Green border */
+    color: #00ff88;                    /* Green text */
+}
+
+/* 
+ACTIVE LEVEL BUTTON (currently playing)
+Pink/red color with extra glow
+*/
+.stage-btn.active {
+    background: rgba(255, 0, 102, 0.4);  /* Pink background */
+    border-color: #ff0066;             /* Pink border */
+    color: #ff0066;                    /* Pink text */
+    box-shadow: 0 0 20px rgba(255, 0, 102, 0.8);  /* Strong pink glow */
+}
+
+/* 
+LOCKED LEVEL BUTTON (not unlocked yet)
+Gray color and disabled cursor
+*/
+.stage-btn.locked {
+    background: rgba(100, 100, 100, 0.2);  /* Gray background */
+    border-color: #666666;             /* Gray border */
+    color: #666666;                    /* Gray text */
+    cursor: not-allowed;               /* Show "not allowed" cursor */
+}
+
+/* 
+Emoji in level button
+Slightly larger than text
+*/
+.stage-emoji {
+    font-size: 1.2em;
+}
+
+/* ========================================
+   ACTION BUTTONS
+   ======================================== */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.action-buttons button {
+    padding: 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+#solve {
+    background: linear-gradient(135deg, #ff0066, #ff00ff);
+    color: #ffffff;
+    box-shadow: 0 5px 20px rgba(255, 0, 102, 0.4);
+}
+
+#solve:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255, 0, 102, 0.6);
+}
+
+#restart {
+    background: linear-gradient(135deg, #00ff88, #00d4ff);
+    color: #0a0a1e;
+    box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4);
+}
+
+#restart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 255, 136, 0.6);
+}
+
+.action-buttons button:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+   LOGIN MODAL
+   ======================================== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #16213e, #0a0a1e);
+    padding: 40px;
+    border-radius: 20px;
+    border: 3px solid #00ff88;
+    box-shadow: 0 10px 50px rgba(0, 255, 136, 0.5);
+    max-width: 450px;
+    width: 90%;
+}
+
+.modal-content h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2em;
+    text-align: center;
+    color: #00ff88;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    text-align: center;
+    color: #00d4ff;
+    margin-bottom: 25px;
+    font-size: 1.1em;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content input {
+    padding: 15px;
+    font-size: 1em;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border: 2px solid #00d4ff;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.modal-content input:focus {
+    border-color: #00ff88;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
+
+.modal-content button[type="submit"] {
+    padding: 15px;
+    font-size: 1.2em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #00ff88, #00d4ff);
+    color: #0a0a1e;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 2px;
+}
+
+.modal-content button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 255, 136, 0.6);
+}
+
+.modal-link {
+    text-align: center;
+    margin-top: 15px;
+    color: #ffffff;
+}
+
+.modal-link a {
+    color: #00ff88;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.modal-link a:hover {
+    color: #00d4ff;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+}
+
+.guest-btn {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    font-size: 1.1em;
+    font-weight: 700;
+    background: rgba(255, 0, 102, 0.3);
+    color: #ff0066;
+    border: 2px solid #ff0066;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.guest-btn:hover {
+    background: rgba(255, 0, 102, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 0, 102, 0.6);
+}
+
+.guest-note {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #999999;
+    font-style: italic;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2em;
+    }
+    
+    .main-container {
+        flex-direction: column;
+    }
+    
+    .control-panel {
+        flex: 1;
+        max-width: 100%;
+    }
+    
+    .stages-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.5em;
+        letter-spacing: 2px;
+    }
+    
+    .stages-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
